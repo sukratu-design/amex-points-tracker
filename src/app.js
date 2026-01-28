@@ -272,32 +272,56 @@ function updateTransactionsList() {
     }
 
     container.innerHTML = `
-        <table class="transactions-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Card</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th style="text-align: right">Amount</th>
-                    <th style="text-align: right">Points</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                ${filtered.map(t => `
+        <div class="table-wrapper">
+            <table class="transactions-table">
+                <thead>
                     <tr>
-                        <td>${formatDate(t.date)}</td>
-                        <td><span class="card-tag ${t.card}">${CARDS[t.card].name}</span></td>
-                        <td><span class="category-tag ${getCategoryClass(t.category)}">${formatCategory(t.category)}</span></td>
-                        <td>${t.description || '-'}</td>
-                        <td style="text-align: right">₹${t.amount.toLocaleString('en-IN')}</td>
-                        <td style="text-align: right" class="points-earned ${(t.points || 0) === 0 ? 'zero' : ''}">${(t.points || 0).toLocaleString('en-IN')}</td>
-                        <td><button class="delete-btn" data-id="${t.id}">×</button></td>
+                        <th>Date</th>
+                        <th class="hide-mobile">Card</th>
+                        <th class="hide-mobile">Category</th>
+                        <th class="hide-tablet">Description</th>
+                        <th style="text-align: right">Amount</th>
+                        <th style="text-align: right">Points</th>
+                        <th></th>
                     </tr>
-                `).join('')}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    ${filtered.map(t => `
+                        <tr>
+                            <td data-label="Date">${formatDate(t.date)}</td>
+                            <td data-label="Card" class="hide-mobile"><span class="card-tag ${t.card}">${CARDS[t.card].name}</span></td>
+                            <td data-label="Category" class="hide-mobile"><span class="category-tag ${getCategoryClass(t.category)}">${formatCategory(t.category)}</span></td>
+                            <td data-label="Description" class="hide-tablet">${t.description || '-'}</td>
+                            <td data-label="Amount" style="text-align: right">₹${t.amount.toLocaleString('en-IN')}</td>
+                            <td data-label="Points" style="text-align: right" class="points-earned ${(t.points || 0) === 0 ? 'zero' : ''}">${(t.points || 0).toLocaleString('en-IN')}</td>
+                            <td><button class="delete-btn" data-id="${t.id}" aria-label="Delete transaction">×</button></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+        <!-- Mobile card view -->
+        <div class="transactions-mobile">
+            ${filtered.map(t => `
+                <div class="transaction-card">
+                    <div class="transaction-card-header">
+                        <span class="transaction-date">${formatDate(t.date)}</span>
+                        <span class="card-tag ${t.card}">${CARDS[t.card].name}</span>
+                    </div>
+                    <div class="transaction-card-body">
+                        <span class="category-tag ${getCategoryClass(t.category)}">${formatCategory(t.category)}</span>
+                        ${t.description ? `<span class="transaction-desc">${t.description}</span>` : ''}
+                    </div>
+                    <div class="transaction-card-footer">
+                        <div class="transaction-amounts">
+                            <span class="transaction-amount">₹${t.amount.toLocaleString('en-IN')}</span>
+                            <span class="points-earned ${(t.points || 0) === 0 ? 'zero' : ''}">${(t.points || 0).toLocaleString('en-IN')} pts</span>
+                        </div>
+                        <button class="delete-btn" data-id="${t.id}" aria-label="Delete transaction">×</button>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
     `
 
     // Add delete handlers

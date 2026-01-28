@@ -315,10 +315,17 @@ button:disabled {
     color: #fff;
 }
 
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 16px;
+}
+
 .transactions-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 16px;
+    min-width: 600px;
 }
 
 .transactions-table th,
@@ -497,23 +504,261 @@ button:disabled {
     display: none;
 }
 
-@media (max-width: 600px) {
-    .transactions-table {
-        font-size: 0.85rem;
+/* Mobile card view - hidden by default, shown on small screens */
+.transactions-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.transaction-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transaction-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.transaction-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.transaction-card-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.transaction-desc {
+    font-size: 0.85rem;
+    color: #aaa;
+    width: 100%;
+}
+
+.transaction-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transaction-amounts {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.transaction-amount {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Tablet breakpoint - 768px */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
     }
 
-    .transactions-table th:nth-child(4),
-    .transactions-table td:nth-child(4) {
+    .hide-tablet {
+        display: none !important;
+    }
+
+    .transactions-table {
+        min-width: 500px;
+    }
+
+    .transactions-table th,
+    .transactions-table td {
+        padding: 10px 8px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .cards-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .card-box {
+        padding: 20px;
+    }
+
+    .points-display {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile breakpoint - 480px */
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    /* Hide table, show mobile cards */
+    .table-wrapper {
         display: none;
+    }
+
+    .transactions-mobile {
+        display: flex;
+    }
+
+    .hide-mobile {
+        display: none !important;
     }
 
     .user-header {
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
+        padding: 10px;
     }
 
     .user-info {
         justify-content: center;
+    }
+
+    .sign-out-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .section {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    input, select {
+        padding: 10px 12px;
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+
+    button {
+        padding: 12px 20px;
+        width: 100%;
+    }
+
+    .card-box {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .card-name {
+        font-size: 1rem;
+    }
+
+    .points-display {
+        font-size: 1.75rem;
+    }
+
+    .spend-info {
+        font-size: 0.85rem;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tab {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .category-breakdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .category-item {
+        padding: 10px;
+    }
+
+    .category-item .name {
+        font-size: 0.75rem;
+    }
+
+    .category-item .amount {
+        font-size: 1rem;
+    }
+
+    .reward-info {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+
+    /* Larger touch targets for delete button */
+    .delete-btn {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 8px 12px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-tag {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .category-tag {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    body {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .section {
+        padding: 10px;
+    }
+
+    .transaction-card {
+        padding: 12px;
+    }
+
+    .points-display {
+        font-size: 1.5rem;
+    }
+
+    .category-breakdown {
+        grid-template-columns: 1fr;
     }
 }
