@@ -31,6 +31,9 @@ function handleAuthState(user) {
         authContainer.classList.add('hidden')
         appContent.classList.remove('hidden')
 
+        // Hide offline badge when signed in (Firebase is working)
+        offlineBadge?.classList.add('hidden')
+
         // Update user info
         if (userAvatar) {
             userAvatar.src = user.photoURL || ''
@@ -94,11 +97,14 @@ signOutBtn?.addEventListener('click', async () => {
     }
 })
 
-// Handle offline/online status
+// Handle offline/online status (only show badge if actually offline)
 window.addEventListener('online', () => {
     offlineBadge?.classList.add('hidden')
 })
 
 window.addEventListener('offline', () => {
-    offlineBadge?.classList.remove('hidden')
+    // Only show offline badge if browser is truly offline
+    if (!navigator.onLine) {
+        offlineBadge?.classList.remove('hidden')
+    }
 })
