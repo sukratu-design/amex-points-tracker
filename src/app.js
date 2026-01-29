@@ -293,7 +293,7 @@ function updateTransactionsList() {
                         <td>${t.description || '-'}</td>
                         <td style="text-align: right">₹${t.amount.toLocaleString('en-IN')}</td>
                         <td style="text-align: right" class="points-earned ${(t.points || 0) === 0 ? 'zero' : ''}">${(t.points || 0).toLocaleString('en-IN')}</td>
-                        <td><button class="delete-btn" data-id="${t.id}">×</button></td>
+                        <td><button class="delete-btn" data-id="${t.id}"><span class="delete-icon">×</span><span class="delete-label"> Delete</span></button></td>
                     </tr>
                 `).join('')}
             </tbody>

@@ -397,6 +397,10 @@ button:disabled {
     box-shadow: none;
 }
 
+.delete-label {
+    display: none;
+}
+
 .category-breakdown {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -595,7 +599,7 @@ button:disabled {
     .transactions-table tr {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto auto auto;
         gap: 6px 12px;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -643,7 +647,7 @@ button:disabled {
         white-space: nowrap;
     }
 
-    /* Row 3: Amount (left) + Points (middle) + Delete (right) */
+    /* Row 3: Amount (left) + Points (right) */
     .transactions-table td:nth-child(5) {
         grid-column: 1;
         grid-row: 3;
@@ -664,20 +668,32 @@ button:disabled {
         margin-top: 2px;
     }
 
-    /* Delete button - inline with points */
+    /* Row 4: Delete button - full width row */
     .transactions-table td:nth-child(7) {
-        position: absolute;
-        right: 4px;
-        top: 4px;
-    }
-
-    .transactions-table tr {
-        position: relative;
+        grid-column: 1 / -1;
+        grid-row: 4;
+        text-align: center;
+        padding-top: 8px;
+        margin-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .delete-btn {
-        font-size: 1.1rem;
-        padding: 4px 6px;
+        font-size: 0.85rem;
+        padding: 8px 16px;
+        width: 100%;
+        min-height: 44px;
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+        border-radius: 6px;
+    }
+
+    .delete-btn:hover {
+        background: rgba(255, 107, 107, 0.2);
+    }
+
+    .delete-label {
+        display: inline;
     }
 
     /* Action buttons */
