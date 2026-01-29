@@ -489,31 +489,214 @@ button:disabled {
 }
 
 /* Hide main app when not authenticated */
-.app-content.hidden {
-    display: none;
-}
-
+.app-content.hidden,
 .auth-container.hidden {
     display: none;
 }
 
-@media (max-width: 600px) {
-    .transactions-table {
-        font-size: 0.85rem;
+/* Hidden utility */
+.hidden {
+    display: none !important;
+}
+
+/* ---- Mobile Responsive ---- */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
     }
 
-    .transactions-table th:nth-child(4),
-    .transactions-table td:nth-child(4) {
-        display: none;
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
 
+    /* User header */
     .user-header {
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
+        padding: 10px;
+    }
+
+    .user-header > * {
+        text-align: center;
     }
 
     .user-info {
         justify-content: center;
+    }
+
+    /* Card summary boxes */
+    .cards-summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .card-box {
+        padding: 16px;
+    }
+
+    .points-display {
+        font-size: 2rem;
+    }
+
+    /* Sections */
+    .section {
+        padding: 16px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+
+    /* Form */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .reward-info {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+
+    /* Tabs */
+    .tabs {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tab {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    /* Category breakdown */
+    .category-breakdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    /* Transactions: convert table to card layout */
+    .transactions-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .transactions-table thead {
+        display: none;
+    }
+
+    .transactions-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .transactions-table tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 6px 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 12px;
+    }
+
+    .transactions-table tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .transactions-table td {
+        padding: 0;
+        border-bottom: none;
+    }
+
+    /* Row 1: Date (left) + Card tag (right) */
+    .transactions-table td:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: 0.8rem;
+        color: #888;
+    }
+
+    .transactions-table td:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: right;
+    }
+
+    /* Row 2: Category (left) + Description (right) */
+    .transactions-table td:nth-child(3) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .transactions-table td:nth-child(4) {
+        grid-column: 2;
+        grid-row: 2;
+        text-align: right;
+        color: #888;
+        font-size: 0.85rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Row 3: Amount (left) + Points (middle) + Delete (right) */
+    .transactions-table td:nth-child(5) {
+        grid-column: 1;
+        grid-row: 3;
+        text-align: left !important;
+        font-size: 1rem;
+        font-weight: 600;
+        padding-top: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 2px;
+    }
+
+    .transactions-table td:nth-child(6) {
+        grid-column: 2;
+        grid-row: 3;
+        text-align: right !important;
+        padding-top: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 2px;
+    }
+
+    /* Delete button - inline with points */
+    .transactions-table td:nth-child(7) {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+    }
+
+    .transactions-table tr {
+        position: relative;
+    }
+
+    .delete-btn {
+        font-size: 1.1rem;
+        padding: 4px 6px;
+    }
+
+    /* Action buttons */
+    .section > div[style*="display: flex"] {
+        flex-direction: column;
+    }
+
+    .btn-secondary, .btn-danger {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 380px) {
+    .category-breakdown {
+        grid-template-columns: 1fr;
+    }
+
+    .points-display {
+        font-size: 1.7rem;
     }
 }
