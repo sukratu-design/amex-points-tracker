@@ -357,6 +357,11 @@ button:disabled {
     color: #51cf66;
 }
 
+.category-tag.gyftr {
+    background: rgba(138, 43, 226, 0.2);
+    color: #b57edc;
+}
+
 .points-earned {
     font-weight: 600;
     color: #51cf66;

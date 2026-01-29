@@ -16,12 +16,14 @@ export const CARDS = {
         name: 'Charge Metal',
         pointsPerRupee: 1 / 40,
         internationalMultiplier: 3,
+        gyftrMultiplier: 5,
         noPointsCategories: ['fuel', 'insurance', 'utilities']
     },
     travel: {
         name: 'Platinum Travel',
         pointsPerRupee: 1 / 50,
         internationalMultiplier: 1,
+        gyftrMultiplier: 3,
         noPointsCategories: ['fuel', 'insurance', 'utilities'],
         milestones: [
             { spend: 190000, bonusPoints: 15000 },
@@ -174,6 +176,8 @@ export function calculatePoints(transaction) {
     let multiplier = 1
     if (transaction.category === 'international') {
         multiplier = card.internationalMultiplier
+    } else if (transaction.category === 'gyftr') {
+        multiplier = card.gyftrMultiplier
     }
 
     return Math.floor(transaction.amount * card.pointsPerRupee * multiplier)
@@ -314,6 +318,7 @@ function formatCategory(cat) {
         groceries: 'Groceries',
         entertainment: 'Entertainment',
         international: 'International',
+        gyftr: 'Gyftr Vouchers',
         fuel: 'Fuel',
         insurance: 'Insurance',
         utilities: 'Utilities',
@@ -325,6 +330,7 @@ function formatCategory(cat) {
 function getCategoryClass(cat) {
     if (['fuel', 'insurance', 'utilities'].includes(cat)) return 'no-points'
     if (cat === 'international') return 'intl'
+    if (cat === 'gyftr') return 'gyftr'
     return ''
 }
 
